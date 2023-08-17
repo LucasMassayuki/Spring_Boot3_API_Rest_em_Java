@@ -1,4 +1,4 @@
-package med.voll.api.infra;
+package med.voll.api.infra.exception;
 
 import org.hibernate.action.internal.EntityActionVetoException;
 import org.springframework.http.ResponseEntity;
