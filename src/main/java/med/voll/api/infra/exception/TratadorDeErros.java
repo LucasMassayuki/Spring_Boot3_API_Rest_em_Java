@@ -1,5 +1,6 @@
 package med.voll.api.infra.exception;
 
+import med.voll.api.domain.ValidacaoException;
 import org.hibernate.action.internal.EntityActionVetoException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -19,6 +20,11 @@ public class TratadorDeErros {
         var erros = ex.getFieldErrors();
 
         return ResponseEntity.badRequest().body(erros.stream().map(DadosErrosValidacao::new).toList());
+    }
+
+    @ExceptionHandler(ValidacaoException.class)
+    public ResponseEntity tratarErrorDeNegocio(ValidacaoException ex){
+       return ResponseEntity.badRequest().body(ex.getMessage());
     }
 
     private record DadosErrosValidacao(String caompo, String mensagem) {
